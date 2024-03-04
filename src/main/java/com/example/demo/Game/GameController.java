@@ -3,9 +3,8 @@ package com.example.demo.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/game")
@@ -22,6 +21,12 @@ public class GameController {
         return gameService.GetGames();
 
     }
+
+    @GetMapping(path = "{gameserialNum}")
+    public Optional<Game> SearchGame(@PathVariable("gameserialNum") Long gameserialNum){
+        return gameService.SearchGame(gameserialNum);
+    }
+
     @PostMapping
     public void registerNewGame(@RequestBody Game game){
         gameService.addNewGame(game);
